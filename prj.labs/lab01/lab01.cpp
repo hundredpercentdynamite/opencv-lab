@@ -28,12 +28,12 @@ int main() {
   drawGradient(img, 0, 60);
   cv::Rect2d rc3 = {0, 60, 768, 60 };
   img.convertTo(img, CV_32F);
-  img = img / 255;
   cv::Mat thirdrect = img(rc3);
+  thirdrect = thirdrect / 255;
   cv::Mat tmp;
   cv::pow(thirdrect, 2.2, tmp);
   tmp.copyTo(thirdrect);
-  img = img * 255;
+  thirdrect = thirdrect * 255;
   img.convertTo(img, CV_8UC1);
 
   // draw gamma
