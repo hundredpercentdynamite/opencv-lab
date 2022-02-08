@@ -1,5 +1,5 @@
 ## Работа 1. Исследование гамма-коррекции
-автор: Полевой Д.В.
+автор: Клейменов В. Е.
 дата: @time_stemp@
 
 <!-- url: https://gitlab.com/2021-misis-spring/polevoy_d_v/-/tree/master/prj.labs/lab01 -->
