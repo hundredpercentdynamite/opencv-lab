@@ -27,7 +27,7 @@ int main() {
   // draw gamma with pow
   drawGradient(img, 0, 60);
   cv::Rect2d rc3 = {0, 60, 768, 60 };
-  img.convertTo(img, CV_32F);
+  img.convertTo(img, CV_32FC1);
   cv::Mat thirdrect = img(rc3);
   thirdrect = thirdrect / 255;
   cv::Mat tmp;
