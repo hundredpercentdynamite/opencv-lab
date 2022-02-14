@@ -1,6 +1,6 @@
 ## Работа 1. Исследование гамма-коррекции
-автор: Клейменов В. Е.
-дата: @time_stemp@
+автор: Клейменов В. Е.<br>
+дата: @time_stemp@<br>
 url: [github](https://github.com/hundredpercentdynamite/opencv-lab/tree/master/prj.labs/lab01)
 
 ### Задание
@@ -12,8 +12,12 @@ url: [github](https://github.com/hundredpercentdynamite/opencv-lab/tree/master/p
 
 ### Результаты
 
-![](lab01.png)
+![](lab01.png)<br>
 Рис. 1. Результаты работы программы (сверху вниз $I_1$, $G_1$, $G_2$)
+
+#### Время выполнения:
+1. Для $G_1$ время обработки изображения составило 5мс.
+2. Для $G_2$ время обработки изображения составило 2мс.
 
 ### Текст программы
 

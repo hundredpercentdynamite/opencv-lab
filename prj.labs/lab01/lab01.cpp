@@ -1,4 +1,5 @@
 #include <opencv2/opencv.hpp>
+#include <iostream>
 
 void drawGradient (cv::Mat& mx, double x, double y) {
   cv::Rect2d rc = {x, y, 768, 60 };
@@ -26,6 +27,7 @@ int main() {
 
   // draw gamma with pow
   drawGradient(img, 0, 60);
+  auto startPow = std::chrono::high_resolution_clock::now();
   cv::Rect2d rc3 = {0, 60, 768, 60 };
   img.convertTo(img, CV_32FC1);
   cv::Mat thirdrect = img(rc3);
@@ -35,9 +37,13 @@ int main() {
   tmp.copyTo(thirdrect);
   thirdrect = thirdrect * 255;
   img.convertTo(img, CV_8UC1);
+  auto stopPow = std::chrono::high_resolution_clock::now();
+  auto powDuration = std::chrono::duration_cast<std::chrono::milliseconds>(stopPow - startPow);
+  std::cout << "Pow duration: " << powDuration.count() << std::endl;
 
   // draw gamma
   drawGradient(img, 0, 120);
+  auto start = std::chrono::high_resolution_clock::now();
   cv::Rect2d rc2 = {0, 120, 768, 60 };
   cv::Mat secondrect = img(rc2);
   for (int i = 0; i <= rc2.height; i++) {
@@ -47,7 +53,9 @@ int main() {
       point = cv::saturate_cast<u_char>(corrected);
     }
   }
-
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
+  std::cout << "Point access duration: " << duration.count() << std::endl;
   //   save result
   cv::imwrite("lab01.png", img);
 }
