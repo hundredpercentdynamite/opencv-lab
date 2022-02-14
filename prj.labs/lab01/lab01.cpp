@@ -43,8 +43,8 @@ int main() {
   for (int i = 0; i <= rc2.height; i++) {
     for (int j = 0; j <= rc2.width; j++) {
       auto& point = secondrect.at<uint8_t>(i, j);
-      float tmp = powf(float(point) / float(255), 2.2) * 255;
-      point = cv::saturate_cast<u_char>(tmp);
+      float corrected = powf(float(point) / float(255), 2.2) * 255;
+      point = cv::saturate_cast<u_char>(corrected);
     }
   }
 
