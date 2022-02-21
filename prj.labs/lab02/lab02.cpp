@@ -98,7 +98,7 @@ int main() {
   cv::Mat pngHist = getHist(img);
   cv::Mat jpgHist = getHist(jpg);
 
-  cv::Mat resultHist(400, 1054, CV_8UC3);
+  cv::Mat resultHist(400, 1044, CV_8UC3);
   cv::Rect2d rc({ 0, 0, 512, 400 });
   pngHist.copyTo(resultHist(rc));
   rc.x = 532;
