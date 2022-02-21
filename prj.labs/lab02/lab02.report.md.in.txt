@@ -1,8 +1,7 @@
 ## Работа 2. Исследование каналов и JPEG-сжатия
-автор: Полевой Д.В.
-дата: @time_stemp@
-
-<!-- url: https://gitlab.com/2021-misis-spring/polevoy_d_v/-/tree/master/prj.labs/lab02 -->
+автор: Клейменов В. Е.<br>
+дата: @time_stemp@<br>
+url: [https://github.com/hundredpercentdynamite/opencv-lab/tree/master/prj.labs/lab02](https://github.com/hundredpercentdynamite/opencv-lab/tree/master/prj.labs/lab02)
 
 ### Задание
 1. В качестве тестового использовать изображение data/cross_0256x0256.png
@@ -17,17 +16,17 @@
 
 ### Результаты
 
-![](cross_0256x0256_025.jpg)
+![](cross_0256x0256_025.jpg)<br>
 Рис. 1. Тестовое изображение после сохранения в формате JPEG с качеством 25%
 
-![](cross_0256x0256_png_channels.png)
+![](cross_0256x0256_png_channels.png)<br>
 Рис. 2. Визуализация каналов исходного тестового изображения
 
-![](cross_0256x0256_jpg_channels.png)
+![](cross_0256x0256_jpg_channels.png)<br>
 Рис. 3. Визуализация каналов JPEG-версии тестового изображения
 
-![](cross_0256x0256_hists.png)
-Рис. 3. Визуализация гистограм исходного и JPEG-версии тестового изображения
+![](cross_0256x0256_hists.png)<br>
+Рис. 4. Визуализация гистограм исходного и JPEG-версии тестового изображения
 
 ### Текст программы
 
