@@ -1,5 +1,6 @@
 #include <opencv2/opencv.hpp>
 #include <vector>
+#include "../../utils/utils.cpp"
 
 cv::Mat getMosaic(cv::Mat& img) {
   int rows = img.rows;
@@ -34,47 +35,6 @@ cv::Mat getMosaic(cv::Mat& img) {
   return mosaic;
 }
 
-cv::Mat getHist(cv::Mat& img) {
-  float range[] = { 0, 256 } ;
-  const float* histRange = { range };
-  cv::Mat channels[3];
-  cv::split(img, channels);
-  int histSize = 256;
-  bool uniform = true;
-  bool accumulate = false;
-
-  cv::Mat b_hist, g_hist, r_hist;
-
-  int hist_w = 512; int hist_h = 400;
-  int bin_w = cvRound( (double) hist_w/histSize );
-
-  calcHist( &channels[0], 1, 0, cv::Mat(), b_hist, 1, &histSize, &histRange, uniform, accumulate );
-  calcHist( &channels[1], 1, 0, cv::Mat(), g_hist, 1, &histSize, &histRange, uniform, accumulate );
-  calcHist( &channels[2], 1, 0, cv::Mat(), r_hist, 1, &histSize, &histRange, uniform, accumulate );
-
-  cv::Mat histImage( hist_h, hist_w, CV_8UC3, cv::Scalar( 255,255,255) );
-
-  normalize(b_hist, b_hist, 0, histImage.rows, cv::NORM_MINMAX, -1, cv::Mat() );
-  normalize(g_hist, g_hist, 0, histImage.rows, cv::NORM_MINMAX, -1, cv::Mat() );
-  normalize(r_hist, r_hist, 0, histImage.rows, cv::NORM_MINMAX, -1, cv::Mat() );
-
-  for( int i = 1; i < histSize; i++ )
-  {
-    line( histImage, cv::Point( bin_w*(i-1), hist_h - cvRound(b_hist.at<float>(i-1)) ) ,
-          cv::Point( bin_w*(i), hist_h - cvRound(b_hist.at<float>(i)) ),
-          cv::Scalar( 255, 0, 0), 2, 8, 0  );
-    line( histImage, cv::Point( bin_w*(i-1), hist_h - cvRound(g_hist.at<float>(i-1)) ) ,
-          cv::Point( bin_w*(i), hist_h - cvRound(g_hist.at<float>(i)) ),
-          cv::Scalar( 0, 255, 0), 2, 8, 0  );
-    line( histImage, cv::Point( bin_w*(i-1), hist_h - cvRound(r_hist.at<float>(i-1)) ) ,
-          cv::Point( bin_w*(i), hist_h - cvRound(r_hist.at<float>(i)) ),
-          cv::Scalar( 0, 0, 255), 2, 8, 0  );
-  }
-
-  return histImage;
-}
-
-
 int main() {
   // read png
   auto imgPath = cv::samples::findFile("../data/cross_0256x0256.png");
@@ -95,8 +55,8 @@ int main() {
   cv::imwrite("cross_0256x0256_jpg_channels.png", jpgMosaic);
 
 
-  cv::Mat pngHist = getHist(img);
-  cv::Mat jpgHist = getHist(jpg);
+  cv::Mat pngHist = getThreeChannelHist(img);
+  cv::Mat jpgHist = getThreeChannelHist(jpg);
 
   cv::Mat resultHist(400, 1044, CV_8UC3);
   cv::Rect2d rc({ 0, 0, 512, 400 });
