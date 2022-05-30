@@ -95,3 +95,38 @@ std::string toStringWithPrecision(T value, int precision) {
   ss << std::fixed << std::setprecision(precision) << value;
   return ss.str();
 }
+
+std::vector<int> getFramesIndexes(int total) {
+  int proportion = total / 5;
+  return std::vector<int>({ proportion * 2, proportion * 3, proportion * 4 });
+}
+
+std::vector<cv::Mat> getFrames(cv::VideoCapture& vid) {
+  auto frameCount = vid.get(cv::CAP_PROP_FRAME_COUNT);
+  auto indexes = getFramesIndexes((int)frameCount);
+  std::vector<cv::Mat> frames;
+  for (int i : indexes) {
+    vid.set(cv::CAP_PROP_POS_FRAMES, i - 1);
+    cv::Mat frame;
+    vid >> frame;
+    frames.push_back(frame);
+  }
+
+  return frames;
+}
+
+template<typename T>
+T getMax(T first, T second) {
+  if (first >= second) {
+    return first;
+  }
+  return second;
+}
+
+template<typename T>
+T getMin(T first, T second) {
+  if (first <= second) {
+    return first;
+  }
+  return second;
+}
